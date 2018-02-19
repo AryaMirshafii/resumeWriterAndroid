@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/screen2"
+        android:background="@color/grey"
+        android:focusable="true"
+    >
+
+
+    <Button
+        android:id="@+id/addItemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/backgroundView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Add Item"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonBlue"
+        android:textSize="23dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/backgroundView"
+        android:background="@color/grey"
+        android:focusable="true"
+        />
+
+
+    <Button
+        android:id="@+id/saveObjectiveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/backgroundView"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Save Objective"
+        android:textAllCaps="false"
+        android:textColor="@color/buttonBlue"
+        android:textSize="23dp" />
+
+    <EditText
+        android:id="@+id/objectiveEntry"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/addItemButton"
+        android:layout_alignEnd="@+id/saveObjectiveButton"
+        android:layout_alignStart="@+id/addItemButton"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:textSize="15dp"
+
+
+        android:layout_alignRight="@+id/saveObjectiveButton"
+        android:background="@drawable/roundededittext"
+        android:inputType="textMultiLine"
+        android:text="To make a positive impact on the world and others around me."
+        android:layout_alignLeft="@+id/addItemButton"
+        />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addItemButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/addItemButton"
+        android:layout_marginTop="17dp"
+        android:text="Objective"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:textSize="23dp"
+
+        android:textColor="@color/buttonBlue"
+
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/backgroundView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        />
+
+
+</RelativeLayout>

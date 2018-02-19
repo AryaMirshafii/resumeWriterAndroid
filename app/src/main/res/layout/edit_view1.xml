@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/editScreen"
+    android:background="@drawable/lightblue"
+
+    >
+
+
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="75dp"
+        android:layout_height="49dp"
+
+        android:layout_alignBaseline="@+id/saveButton"
+        android:layout_alignBottom="@+id/saveButton"
+        android:layout_alignLeft="@+id/skillNameLabel"
+        android:layout_alignStart="@+id/skillNameLabel"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Back"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="65dp"
+        android:layout_height="49dp"
+        android:layout_alignEnd="@+id/skilNameEntry"
+        android:layout_alignRight="@+id/skilNameEntry"
+        android:layout_alignTop="@+id/skillEntry"
+        android:layout_marginTop="101dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <TextView
+        android:id="@+id/resumeSectionName"
+        android:layout_width="270dp"
+        android:layout_height="42dp"
+
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/hksemiboldlegacy"
+
+        android:background="@color/grey"
+
+
+
+        android:textAlignment="center"
+        android:text="Skills"
+        android:textSize="24dp"
+        android:textColor="@color/white"
+        />
+
+    <ImageButton
+        android:id="@+id/previousResumeSection"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+
+        android:layout_alignTop="@+id/resumeSectionName"
+        android:layout_toLeftOf="@+id/resumeSectionName"
+        android:layout_toStartOf="@+id/resumeSectionName"
+
+        android:background="@drawable/leftfixed"
+        />
+    <ImageButton
+        android:id="@+id/nextResumeSection"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+
+        android:layout_alignTop="@+id/resumeSectionName"
+        android:layout_toEndOf="@+id/resumeSectionName"
+        android:layout_toRightOf="@+id/resumeSectionName"
+
+        android:background="@drawable/rightfinal"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Skill Name:"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:textColor="@color/white"
+        android:textSize="23dp"
+
+        android:background="@color/clear"
+        android:id="@+id/skillNameLabel"
+        android:layout_marginTop="90dp"
+
+        android:layout_marginLeft="20dp"
+
+
+        />
+
+
+
+    <EditText
+        android:id="@+id/skilNameEntry"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="90dp"
+        android:layout_alignEnd="@+id/nextResumeSection"
+        android:layout_alignRight="@+id/nextResumeSection"
+
+
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+
+
+        android:background="@color/white"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:inputType="text"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/skillEntry"
+
+        android:layout_width="300dp"
+        android:layout_marginBottom="100dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/contactEntry"
+        android:layout_marginTop="30dp"
+
+        android:background="@drawable/roundededittext"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:inputType="textMultiLine"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        />
+
+    <in.devtechsolutions.android.androidtablayout.NumberPicker
+        android:id="@+id/skillPicker"
+        android:layout_below="@+id/skillNameLabel"
+        android:layout_above="@+id/skillEntry"
+        android:layout_marginBottom="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+
+
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundededittext"
+
+
+        />
+    <EditText
+        android:id="@+id/startYearEntry"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+
+
+        android:layout_alignTop="@+id/startYearLabel"
+        android:layout_toEndOf="@+id/skillNameLabel"
+        android:layout_toRightOf="@+id/skillNameLabel"
+        android:background="@color/white"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+    <View
+        android:id="@+id/yearEntryViewExperience"
+        android:layout_width="match_parent"
+
+
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/skillNameLabel"
+        android:layout_marginTop="9dp"
+        android:background="@color/clear" />
+
+    <TextView
+        android:id="@+id/endYearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+
+        android:layout_alignTop="@+id/startYearEntry"
+        android:layout_toLeftOf="@+id/saveButton"
+        android:layout_toStartOf="@+id/saveButton"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="End Year"
+        android:textColor="@color/white"
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/startYearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/yearEntryViewExperience"
+
+        android:layout_alignLeft="@+id/skillNameLabel"
+        android:layout_alignStart="@+id/skillNameLabel"
+        android:layout_marginBottom="5dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Start Year"
+        android:textColor="@color/white"
+        android:textSize="23dp" />
+
+    <EditText
+        android:id="@+id/endYearEntry"
+
+
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+
+
+        android:layout_alignEnd="@+id/skilNameEntry"
+        android:layout_alignRight="@+id/skilNameEntry"
+        android:layout_alignTop="@+id/endYearLabel"
+        android:background="@color/white"
+        android:fontFamily="@font/hksemiboldlegacy"
+
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+
+
+
+    <TextView
+        android:id="@+id/organizationNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+
+
+        android:layout_alignLeft="@+id/startYearLabel"
+        android:layout_alignStart="@+id/startYearLabel"
+        android:layout_below="@+id/yearEntryViewExperience"
+        android:layout_marginTop="20dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Organization"
+        android:textColor="@color/white"
+        android:textSize="23dp" />
+
+    <EditText
+        android:id="@+id/organizationNameEntry"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+
+
+        android:layout_alignLeft="@+id/skilNameEntry"
+        android:layout_alignStart="@+id/skilNameEntry"
+        android:layout_alignTop="@+id/organizationNameLabel"
+        android:background="@color/white"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:inputType="text"
+
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+
+    <EditText
+        android:id="@+id/contactEntry"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+        android:layout_alignEnd="@+id/endYearEntry"
+
+        android:layout_alignRight="@+id/endYearEntry"
+        android:layout_alignTop="@+id/contactNameLabel"
+        android:background="@color/white"
+
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:inputType="text"
+
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+    <TextView
+        android:id="@+id/contactNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+
+
+        android:layout_alignLeft="@+id/startYearLabel"
+        android:layout_alignStart="@+id/startYearLabel"
+        android:layout_below="@+id/organizationNameLabel"
+        android:layout_marginTop="20dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Contact"
+        android:textColor="@color/white"
+        android:textSize="23dp" />
+
+
+    <View
+        android:id="@+id/yearView"
+        android:layout_width="match_parent"
+
+
+        android:layout_height="40dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/startYearEntry"
+        android:background="@color/clear" />
+
+
+    <View
+        android:id="@+id/organizationView"
+        android:layout_width="match_parent"
+
+
+        android:layout_height="40dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/organizationNameLabel"
+        android:background="@color/clear" />
+
+
+    <View
+        android:id="@+id/contactView"
+        android:layout_width="match_parent"
+
+
+        android:layout_height="40dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/contactEntry"
+        android:background="@color/clear" />
+
+
+    <TextView
+
+        android:id="@+id/yearNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+
+
+        android:layout_alignLeft="@+id/skillNameLabel"
+        android:layout_alignStart="@+id/skillNameLabel"
+        android:layout_below="@+id/yearEntryViewExperience"
+        android:layout_marginTop="25dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Year:"
+        android:textColor="@color/white"
+        android:textSize="23dp" />
+
+    <EditText
+        android:id="@+id/yearEntry"
+        android:layout_width="180dp"
+        android:layout_height="30dp"
+
+
+        android:layout_alignLeft="@+id/skilNameEntry"
+        android:layout_alignStart="@+id/skilNameEntry"
+        android:layout_alignTop="@+id/yearNameLabel"
+        android:background="@color/white"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textSize="15dp" />
+
+
+
+</RelativeLayout>

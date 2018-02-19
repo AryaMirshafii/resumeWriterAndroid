@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/loginScreen3"
+    android:background="@drawable/lightblue"
+    android:windowSoftInputMode="stateVisible"
+
+    >
+
+
+    <TextView
+        android:id="@+id/emailLoginLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+
+        android:layout_above="@+id/emailLoginEntry"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/clear"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Please Enter Your Email Address"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textAlignment="center"
+        />
+
+    <EditText
+        android:focusableInTouchMode="true"
+        android:id="@+id/emailLoginEntry"
+        android:layout_width="250dp"
+
+
+        android:layout_height="35dp"
+
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:background="@color/white"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:inputType="textEmailAddress"
+        android:textSize="25dp" />
+
+
+
+
+
+
+</RelativeLayout>

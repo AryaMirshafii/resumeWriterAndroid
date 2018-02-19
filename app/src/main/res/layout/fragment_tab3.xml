@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/lightblue">
+
+    <TextView
+        android:id="@+id/welcomceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/firstNameView"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/firstNameView"
+        android:layout_marginTop="9dp"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Welcome Arya,"
+        android:textColor="@color/white"
+        android:textSize="28dp" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/welcomceLabel"
+        android:layout_alignStart="@+id/welcomceLabel"
+        android:layout_below="@+id/welcomceLabel"
+        android:layout_marginTop="9dp"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="User Information"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <View
+        android:id="@+id/firstNameView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:background="@color/grey"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/firstNameView"
+        android:layout_alignStart="@+id/firstNameView"
+        android:layout_alignTop="@+id/firstNameView"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="First Name"
+        android:layout_marginLeft="7dp"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:id="@+id/textView" />
+
+    <EditText
+        android:id="@+id/firstNameEntry"
+        android:layout_width="190dp"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
+        android:layout_toEndOf="@+id/phoneLabel"
+        android:layout_toRightOf="@+id/phoneLabel"
+        android:background="@drawable/edittextbackground"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:text="Arya"
+        android:textSize="17dp" />
+
+
+    <View
+        android:id="@+id/lastNameView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+
+
+        android:layout_alignLeft="@+id/firstNameView"
+        android:layout_alignStart="@+id/firstNameView"
+
+        android:layout_below="@+id/firstNameView"
+        android:layout_marginTop="10dp"
+        android:background="@color/grey"
+        android:layout_marginRight="12dp"
+        />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lastNameView"
+        android:layout_alignStart="@+id/lastNameView"
+        android:layout_alignTop="@+id/lastNameView"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Last Name"
+        android:layout_marginLeft="7dp"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:id="@+id/lastNameLabel" />
+
+    <EditText
+        android:id="@+id/lastnameEntry"
+        android:layout_width="190dp"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@+id/lastNameLabel"
+        android:layout_alignLeft="@+id/firstNameEntry"
+        android:layout_alignStart="@+id/firstNameEntry"
+        android:background="@drawable/edittextbackground"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:maxLines="1"
+
+        android:singleLine="true"
+        android:text="Mirshafii"
+        android:textSize="17dp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <View
+        android:id="@+id/emailView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/grey"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginRight="12dp"
+        android:layout_alignLeft="@+id/firstNameView"
+        android:layout_alignStart="@+id/firstNameView"
+
+        android:layout_below="@+id/lastNameView"
+
+
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/emailView"
+        android:layout_alignStart="@+id/emailView"
+        android:layout_alignTop="@+id/emailView"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Email Address"
+        android:layout_marginLeft="7dp"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:id="@+id/emailLabel" />
+
+    <EditText
+        android:id="@+id/emailEntry"
+        android:layout_width="190dp"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@+id/emailLabel"
+        android:layout_alignLeft="@+id/lastnameEntry"
+        android:layout_alignStart="@+id/lastnameEntry"
+        android:background="@drawable/edittextbackground"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:maxLines="1"
+
+        android:singleLine="true"
+        android:text="amirshafii3@gatech.edu"
+        android:textSize="17dp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <View
+        android:id="@+id/phoneView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/grey"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginRight="12dp"
+
+        android:layout_alignLeft="@+id/firstNameView"
+        android:layout_alignStart="@+id/firstNameView"
+
+        android:layout_below="@+id/emailView"
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/phoneView"
+        android:layout_alignStart="@+id/phoneView"
+        android:layout_alignTop="@+id/phoneView"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="Phone Number"
+        android:layout_marginLeft="7dp"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:id="@+id/phoneLabel" />
+
+    <EditText
+        android:id="@+id/phoneEntry"
+        android:layout_width="190dp"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@+id/phoneLabel"
+        android:layout_alignLeft="@+id/emailEntry"
+        android:layout_alignStart="@+id/emailEntry"
+        android:background="@drawable/edittextbackground"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:maxLines="1"
+
+        android:singleLine="true"
+        android:text="7148249005"
+        android:textSize="17dp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <View
+        android:id="@+id/schoolView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/grey"
+        android:layout_marginTop="10dp"
+
+        android:layout_marginRight="12dp"
+        android:layout_alignLeft="@+id/firstNameView"
+        android:layout_alignStart="@+id/firstNameView"
+
+        android:layout_below="@+id/phoneView"
+
+
+        />
+
+
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/schoolView"
+        android:layout_alignStart="@+id/schoolView"
+        android:layout_alignTop="@+id/schoolView"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="School"
+        android:layout_marginLeft="7dp"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:id="@+id/schoolLabel" />
+
+    <EditText
+        android:id="@+id/schoolEntry"
+        android:layout_width="190dp"
+        android:layout_height="28dp"
+        android:layout_alignBottom="@+id/schoolLabel"
+        android:layout_alignLeft="@+id/phoneEntry"
+        android:layout_alignStart="@+id/phoneEntry"
+        android:background="@drawable/edittextbackground"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:maxLines="1"
+
+
+        android:singleLine="true"
+        android:text="Georgia Tech Excel Program"
+        android:textSize="17dp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+
+              android:background="@drawable/lightblue">
+
+
+
+    <WebView
+        android:id="@+id/resumeWebView"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+
+        android:layout_centerHorizontal="true"
+        android:layout_above = "@+id/resumeSelector"
+        android:layout_marginBottom="25dp"
+
+
+        />
+
+
+
+
+
+    <HorizontalScrollView
+        android:id="@+id/resumeSelector"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/linear"
+            android:orientation="horizontal"
+
+        >
+        <ImageButton
+            android:id="@+id/resume1Icon"
+            android:layout_width="95dp"
+            android:layout_height="140dp"
+            android:background="@drawable/resume1icon"
+            />
+
+            <ImageButton
+                android:id="@+id/resume2Icon"
+                android:layout_width="95dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/resume2icon" />
+            <ImageButton
+                android:id="@+id/resume3Icon"
+                android:layout_width="95dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/resume3icon" />
+            <ImageButton
+                android:id="@+id/resume4Icon"
+                android:layout_width="95dp"
+                android:layout_height="140dp"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/resume4icon" />
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </HorizontalScrollView>
+
+
+</RelativeLayout>
