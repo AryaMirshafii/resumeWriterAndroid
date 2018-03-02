@@ -1,5 +1,6 @@
 package in.devtechsolutions.android.androidtablayout;
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+
+import com.loopeer.cardstack.CardStackView;
 
 import java.util.Arrays;
 
@@ -45,7 +48,7 @@ public class Tab2Fragment extends Fragment {
         configureSubViews();
 
 
-
+        
         return view;
     }
 
@@ -86,6 +89,9 @@ public class Tab2Fragment extends Fragment {
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
+
+
+
 
 
         objectiveEntry.setText(dataManager.getObjective());

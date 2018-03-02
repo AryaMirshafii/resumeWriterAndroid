@@ -38,5 +38,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.0.1'
     compile 'com.loopeer.library:cardstack:1.0.2'
     compile 'cn.aigestudio.wheelpicker:WheelPicker:1.1.2'
+    compile 'com.loopeer.library:cardstack:1.0.2'
 
 }
