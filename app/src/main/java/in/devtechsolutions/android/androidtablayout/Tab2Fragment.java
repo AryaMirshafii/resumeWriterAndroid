@@ -81,14 +81,38 @@ public class Tab2Fragment extends Fragment {
             }
         });
 
-
+        /**
         RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
-        rv.setHasFixedSize(true);
+        //rv.setHasFixedSize(false);
         MyAdapter adapter = new MyAdapter(new String[]{"Internship & Job Experience", "Skills", "Courses", "Extracurriculars"});
         rv.setAdapter(adapter);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
+        */
+        CardStackView mStackView;
+
+        TestStackAdapter mTestStackAdapter;
+
+        mStackView = (CardStackView) view.findViewById(R.id.stackview_main);
+        CardStackView.ItemExpendListener myListener = new CardStackView.ItemExpendListener() {
+            @Override
+            public void onItemExpend(boolean expend) {
+
+            }
+        };
+        mStackView.setItemExpendListener(myListener);
+        mTestStackAdapter = new TestStackAdapter(getContext());
+        mStackView.setAdapter(mTestStackAdapter);
+        objectiveEntry.setText(dataManager.getObjective());
+        Integer[] TEST_DATAS = new Integer[]{
+                R.color.experienceColor,
+                R.color.skillColor,
+                R.color.courseColor,
+                R.color.extraCurricularColor
+
+        };
+        mTestStackAdapter.updateData(Arrays.asList(TEST_DATAS));
 
 
 

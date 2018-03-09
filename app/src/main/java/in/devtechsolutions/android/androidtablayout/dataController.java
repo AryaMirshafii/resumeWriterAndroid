@@ -1,9 +1,13 @@
 package in.devtechsolutions.android.androidtablayout;
 
 import android.content.Context;
+import android.text.Editable;
 
 import java.io.File;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * Created by aryamirshafii on 1/14/18.
@@ -17,6 +21,12 @@ public class dataController {
     private String lastNameFileName = "lastName.txt";
     private String phoneFileName = "phoneNumber.txt";
     private String educationFileName = "emailAdress.txt";
+    private String skillFileName = "skill.txt";
+    private String experienceFileName = "experience.txt";
+    private String courseFileName = "courses.txt";
+    private String extracurricularFilename = "extracurriculars";
+
+
 
     private String emailFileName = "email.txt";
     public  dataController(Context context){
@@ -24,6 +34,7 @@ public class dataController {
 
 
     }
+
 
 
     public void setFirstName(String firstName){
@@ -301,6 +312,7 @@ public class dataController {
 
 
             while ((n = fis.read(buffer)) != -1)
+
             {
                 fileContent.append(new String(buffer, 0, n));
             }
@@ -313,4 +325,100 @@ public class dataController {
 
         return "";
     }
+
+    /**
+     * Allows the user to save entered skills
+     * @param name the skill name
+     * @param description the skill description
+     */
+    public void saveSkill(Editable name, Editable description) {
+        String skillToAdd = name +"_" + description + "\n";
+        FileOutputStream outputStream;
+
+
+        try {
+            outputStream = context.openFileOutput(skillFileName , Context.MODE_APPEND);
+            outputStream.write(skillToAdd.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //start with array but use hashmap once you know it works
+    public List getSkills(){
+       ArrayList<String> listToReturn = new ArrayList<String>();
+        try {
+            InputStream inputStream = context.openFileInput(skillFileName);
+
+            if (inputStream != null) {
+                InputStreamReader streamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+                String l;
+
+                while (( l = bufferedReader.readLine()) != null) {
+                    // do what you want with the line
+                    //System.out.println("MY line  is" + l);
+                    listToReturn.add(l);
+                }
+
+            }
+
+            inputStream.close(); //close the file
+        } catch (java.io.FileNotFoundException e) {
+            //file doesnt exist
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listToReturn;
+    }
+
+
+
+    public void saveExperience(Editable title, Editable startYear, Editable endYear,Editable organizationName, Editable contact, Editable description){
+        String experienceToAdd = title +"_" + startYear +"_" + endYear +"_" + organizationName +"_" + contact +"_" + description + "\n";
+        FileOutputStream outputStream;
+
+
+        try {
+            outputStream = context.openFileOutput(experienceFileName , Context.MODE_APPEND);
+            outputStream.write(experienceToAdd.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public List getExperience(){
+        ArrayList<String> listToReturn = new ArrayList<String>();
+        try {
+            InputStream inputStream = context.openFileInput(experienceFileName);
+
+            if (inputStream != null) {
+                InputStreamReader streamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+                String l;
+
+                while (( l = bufferedReader.readLine()) != null) {
+                    // do what you want with the line
+                    System.out.println("MY line  is" + l);
+                    listToReturn.add(l);
+                }
+
+            }
+
+            inputStream.close(); //close the file
+        } catch (java.io.FileNotFoundException e) {
+            //file doesnt exist
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listToReturn;
+    }
+
 }

@@ -16,13 +16,24 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.loopeer.cardstack.CardStackView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.loopeer.cardstack.AllMoveDownAnimatorAdapter;
+import com.loopeer.cardstack.CardStackView;
+import com.loopeer.cardstack.UpDownAnimatorAdapter;
+import com.loopeer.cardstack.UpDownStackAnimatorAdapter;
 
 /**
  * Created by aryamirshafii on 1/14/18.
  */
 
-public class loginScreen1 extends Fragment {
+public class loginScreen1 extends Fragment  {
     private TextView firstnameLabelLogin;
     private EditText firstnameLoginEntry;
     private dataController dataManager;
@@ -130,8 +141,11 @@ public class loginScreen1 extends Fragment {
             }
         });
 
+        CardStackView mStackView;
 
-        RecyclerView rv = (RecyclerView) view.findViewById(R.id.rv_recycler_view);
+        TestStackAdapter mTestStackAdapter;
+        /*
+        RecyclerView rv = (RecyclerView) view.findViewById(R.id.stackview_main);
         rv.setHasFixedSize(true);
         MyAdapter adapter = new MyAdapter(new String[]{"Internship & Job Experience", "Skills", "Courses", "Extracurriculars"});
         rv.setAdapter(adapter);
@@ -139,8 +153,31 @@ public class loginScreen1 extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         rv.setLayoutManager(llm);
 
+        */
 
+        mStackView = (CardStackView) view.findViewById(R.id.stackview_main);
+        CardStackView.ItemExpendListener myListener = new CardStackView.ItemExpendListener() {
+            @Override
+            public void onItemExpend(boolean expend) {
+
+            }
+        };
+        mStackView.setItemExpendListener(myListener);
+        mTestStackAdapter = new TestStackAdapter(getContext());
+        mStackView.setAdapter(mTestStackAdapter);
         objectiveEntry.setText(dataManager.getObjective());
+        Integer[] TEST_DATAS = new Integer[]{
+                R.color.experienceColor,
+                R.color.skillColor,
+                R.color.courseColor,
+                R.color.extraCurricularColor
+
+        };
+        mTestStackAdapter.updateData(Arrays.asList(TEST_DATAS));
+
+
+
+
         objectiveEntry.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 // If the event is a key-down event on the "enter" button

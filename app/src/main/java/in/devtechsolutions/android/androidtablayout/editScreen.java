@@ -19,6 +19,7 @@ import android.widget.EditText;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.zip.Inflater;
 
 /**
@@ -30,6 +31,7 @@ public class editScreen extends Fragment {
     private int resumeSectionIndex = 0;
     @Nullable private View view;
     private TextView sectionText;
+
 
 
 
@@ -69,12 +71,14 @@ public class editScreen extends Fragment {
     //Extracurriculars
     private TextView yearLabel;
     private EditText yearEntry;
+    private dataController dataManager;
 
 
 
 
 
     public View onCreateView (final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
+        dataManager = new dataController(getContext());
         view =inflater.inflate(R.layout.edit_view1, container, false);
 
         sectionText = (TextView) view.findViewById(R.id.resumeSectionName);
@@ -134,6 +138,35 @@ public class editScreen extends Fragment {
 
             }
         });
+
+
+        saveButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                if(resumeSectionIndex == 0){
+
+                    dataManager.saveSkill(skillNameEntry.getText(),skillDescritpionEntry.getText());
+                    dataManager.getSkills();
+                } else if(resumeSectionIndex == 1){
+                    dataManager.saveExperience(skillNameEntry.getText(),startYearEntry.getText(),
+                            endYearEntry.getText(),organizationNameEntry.getText(),
+                            contactEntry.getText(),skillDescritpionEntry.getText());
+                    dataManager.getExperience();
+                }
+
+
+
+            }
+        });
+
+
+
+
+
+
+
+
 
         final ImageButton prevResumeSectionButton = (ImageButton)view.findViewById(R.id.previousResumeSection);
         prevResumeSectionButton.setOnClickListener(new View.OnClickListener(){
@@ -342,13 +375,26 @@ public class editScreen extends Fragment {
                 "Repairing","Technology Design","Troubleshooting"};
 
 
+        skillDescriptions = new String[]{"Understanding the implications of new information for both current and future problem solving and decision making.","Giving full attention to what other people are saying, taking time to understand the points being made, asking questions as appropriate, and not interrupting at inappropriate times.",
+                "Using logic and reasoning to identify the strengths and weaknesses of alternative solutions, conclusions or approaches to problems.","Selecting and using training/instructional methods and procedures appropriate for the situation when learning or teaching new things.",
+                "Using mathematics to solve problems.","Monitoring/Assessing performance of yourself, other individuals, or organizations to make improvements or take corrective action.",
+                "Understanding written sentences and paragraphs in work related documents.",  "Using scientific rules and methods to solve problems.", "Talking to others to convey information effectively.",
+                "Communicating effectively in writing as appropriate for the needs of the audience.", "Identifying complex problems and reviewing related information to develop and evaluate options and implement solutions.",
+                "Managing one's own time and the time of others. ","Adjusting actions in relation to others' actions. ", "Teaching others how to do something.", " Bringing others together and trying to reconcile differences. ",
+                "Persuading others to change their minds or behavior. ","Actively looking for ways to help people. ", "Being aware of others' reactions and understanding why they react as they do. ",
+                "Considering the relative costs and benefits of potential actions to choose the most appropriate one. ", "Performing routine maintenance on equipment and determining when and what kind of maintenance is needed. ",
+                "Determining the kind of tools and equipment needed to do a job. ",  "Installing equipment, machines, wiring, or programs to meet specifications. ", "Controlling operations of equipment or systems. ",
+                "Writing computer programs for various purposes. ",  "Conducting tests and inspections of products, services, or processes to evaluate quality or performance. ", "Repairing machines or systems using the needed tools. ",
+                "Generating or adapting equipment and technology to serve user needs. ",  "Determining causes of operating errors and deciding what to do about it."
 
+        };
         skillPicker.setMinValue(0);
         skillPicker.setMaxValue(skillNames.length - 1);
         skillPicker.setDisplayedValues(skillNames);
         skillPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override public void onValueChange(NumberPicker numberPicker, int i, int i2) {
                 skillNameEntry.setText(skillNames[skillPicker.getValue()]);
+                skillDescritpionEntry.setText(skillDescriptions[skillPicker.getValue()]);
 
 
             }

@@ -19,8 +19,8 @@ import android.widget.TextView;
 import in.devtechsolutions.android.androidtablayout.R;
 
 import static in.devtechsolutions.android.androidtablayout.R.color.courseColor;
-import static in.devtechsolutions.android.androidtablayout.R.color.extracurricularColor;
-import static in.devtechsolutions.android.androidtablayout.R.color.internshipColor;
+import static in.devtechsolutions.android.androidtablayout.R.color.extraCurricularColor;
+import static in.devtechsolutions.android.androidtablayout.R.color.experienceColor;
 import static in.devtechsolutions.android.androidtablayout.R.color.skillColor;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
