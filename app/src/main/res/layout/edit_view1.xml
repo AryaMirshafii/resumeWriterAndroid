@@ -140,6 +140,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:inputType="textMultiLine"
+        android:gravity="top"
+
         android:fontFamily="@font/hksemiboldlegacy"
         android:textSize="15dp"
         android:textColor="@color/black"

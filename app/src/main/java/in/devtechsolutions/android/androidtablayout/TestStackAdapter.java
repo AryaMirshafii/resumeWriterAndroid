@@ -3,8 +3,12 @@ package in.devtechsolutions.android.androidtablayout;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.loopeer.cardstack.CardStackView;
@@ -60,16 +64,28 @@ public class TestStackAdapter extends StackAdapter<Integer> {
     }
 
     static class ColorItemViewHolder extends CardStackView.ViewHolder {
-        View mLayout;
-        View mContainerContent;
-        TextView mTextTitle;
+        private View mLayout;
+        private View mContainerContent;
+        private TextView mTextTitle;
+        private RecyclerView recyclerView;
+        private resumeItemAdapter mAdapter;
+        private dataController dataManager;
+
 
         public ColorItemViewHolder(View view) {
             super(view);
+            dataManager = new dataController(getContext());
             mLayout = view.findViewById(R.id.frame_list_card_item);
             //mLayout = view.findViewById(R.id.l);
             mContainerContent = view.findViewById(R.id.container_list_content);
             mTextTitle = (TextView) view.findViewById(R.id.text_list_card_title);
+
+            recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+
+
+
+
+
         }
 
         @Override
@@ -81,14 +97,51 @@ public class TestStackAdapter extends StackAdapter<Integer> {
             mLayout.getBackground().setColorFilter(ContextCompat.getColor(getContext(), data), PorterDuff.Mode.SRC_IN);
             if(data.equals(R.color.experienceColor)){
                 mTextTitle.setText("Experience");
+                if(!dataManager.getExperience().isEmpty()){
+                    mAdapter = new resumeItemAdapter(dataManager.getExperience(), "experience");
+
+                    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(mAdapter);
+                }
             } else if(data.equals(R.color.skillColor)){
                 mTextTitle.setText("Skills");
+
+
+                mAdapter = new resumeItemAdapter(dataManager.getSkills(), "skill");
+
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(mAdapter);
             } else if(data.equals(R.color.courseColor)){
                 mTextTitle.setText("Courses");
+
+
+                mAdapter = new resumeItemAdapter(dataManager.getCourses(), "course");
+
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(mAdapter);
+
+
+
             }else if(data.equals(R.color.extraCurricularColor)){
                 mTextTitle.setText("Extracurriculars");
+
+
+                mAdapter = new resumeItemAdapter(dataManager.getExtracurricular(), "extracurricular");
+
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(mAdapter);
             }
         }
+
+
 
     }
 

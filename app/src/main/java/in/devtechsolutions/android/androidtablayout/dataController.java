@@ -348,7 +348,7 @@ public class dataController {
 
     //start with array but use hashmap once you know it works
     public List getSkills(){
-       ArrayList<String> listToReturn = new ArrayList<String>();
+       ArrayList<skill> listToReturn = new ArrayList<skill>();
         try {
             InputStream inputStream = context.openFileInput(skillFileName);
 
@@ -357,11 +357,13 @@ public class dataController {
                 BufferedReader bufferedReader = new BufferedReader(streamReader);
 
                 String l;
-
+                skill toAdd;
                 while (( l = bufferedReader.readLine()) != null) {
                     // do what you want with the line
-                    //System.out.println("MY line  is" + l);
-                    listToReturn.add(l);
+                    System.out.println("MY line  is" + l);
+                    String[] skillSeparated = l.split("_");
+                    toAdd= new skill(skillSeparated[0], skillSeparated[1]);
+                    listToReturn.add(toAdd);
                 }
 
             }
@@ -374,6 +376,63 @@ public class dataController {
         }
         return listToReturn;
     }
+
+
+
+    public void saveCourse(Editable name, Editable description){
+        String experienceToAdd = name +"_" + description  + "\n";
+        FileOutputStream outputStream;
+
+
+        try {
+            outputStream = context.openFileOutput(courseFileName , Context.MODE_APPEND);
+            outputStream.write(experienceToAdd.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public List getCourses(){
+        ArrayList<course> listToReturn = new ArrayList<course>();
+        try {
+            InputStream inputStream = context.openFileInput(courseFileName);
+
+            if (inputStream != null) {
+                InputStreamReader streamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+                String l;
+                course toAdd;
+                while (( l = bufferedReader.readLine()) != null) {
+                    // do what you want with the line
+
+                    System.out.println("MY line  is" + l);
+                    String[] skillSeparated = l.split("_");
+                    if(skillSeparated.length == 2){
+                        toAdd= new course(skillSeparated[0], skillSeparated[1]);
+                        listToReturn.add(toAdd);
+                    }
+
+                }
+
+            }
+
+            inputStream.close(); //close the file
+        } catch (java.io.FileNotFoundException e) {
+            //file doesnt exist
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listToReturn;
+    }
+
+
+
+
+
 
 
 
@@ -394,7 +453,7 @@ public class dataController {
 
 
     public List getExperience(){
-        ArrayList<String> listToReturn = new ArrayList<String>();
+        ArrayList<experience> listToReturn = new ArrayList<experience>();
         try {
             InputStream inputStream = context.openFileInput(experienceFileName);
 
@@ -403,11 +462,67 @@ public class dataController {
                 BufferedReader bufferedReader = new BufferedReader(streamReader);
 
                 String l;
-
+                experience toAdd;
                 while (( l = bufferedReader.readLine()) != null) {
                     // do what you want with the line
                     System.out.println("MY line  is" + l);
-                    listToReturn.add(l);
+                    String[] skillSeparated = l.split("_");
+                    if(skillSeparated.length == 6){
+                        toAdd= new experience(skillSeparated[0], skillSeparated[1],skillSeparated[2],skillSeparated[3],skillSeparated[4],skillSeparated[5]);
+                        listToReturn.add(toAdd);
+                    }
+
+
+
+                }
+
+            }
+
+            inputStream.close(); //close the file
+        } catch (java.io.FileNotFoundException e) {
+            //file doesnt exist
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return listToReturn;
+    }
+
+
+
+
+    public void saveExtracurricular(Editable name,Editable year, Editable description) {
+        String skillToAdd = name +"_" + year + "_" +  description + "\n";
+        FileOutputStream outputStream;
+
+
+        try {
+            outputStream = context.openFileOutput(extracurricularFilename , Context.MODE_APPEND);
+            outputStream.write(skillToAdd.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //start with array but use hashmap once you know it works
+    public List getExtracurricular(){
+        ArrayList<extracurricular> listToReturn = new ArrayList<extracurricular>();
+        try {
+            InputStream inputStream = context.openFileInput(extracurricularFilename);
+
+            if (inputStream != null) {
+                InputStreamReader streamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(streamReader);
+
+                String l;
+                extracurricular toAdd;
+                while (( l = bufferedReader.readLine()) != null) {
+                    // do what you want with the line
+                    System.out.println("MY line  is" + l);
+                    String[] skillSeparated = l.split("_");
+                    toAdd= new extracurricular(skillSeparated[0], skillSeparated[1],skillSeparated[2]);
+                    listToReturn.add(toAdd);
                 }
 
             }

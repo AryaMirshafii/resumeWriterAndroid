@@ -14,16 +14,15 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
 
-        android:layout_above="@+id/schoolLoginEntry"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="80dp"
         android:background="@color/clear"
         android:fontFamily="@font/hksemiboldlegacy"
         android:text="What School Do You Attend"
-        android:textColor="@color/white"
-        android:textSize="25dp"
         android:textAlignment="center"
-        />
+        android:textColor="@color/white"
+        android:textSize="25dp" />
 
     <EditText
 
@@ -34,9 +33,9 @@
         android:layout_height="35dp"
 
 
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/schoolLoginLabel"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="35dp"
         android:background="@color/white"
         android:fontFamily="@font/hksemiboldlegacy"
         android:inputType="textPersonName"

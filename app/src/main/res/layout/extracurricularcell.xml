@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="175dp"
+    android:background="@color/extraCurricularColor"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/row_padding_vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical"
+
+    >
+
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:id="@+id/extracurricularTitle"
+        android:layout_width="250dp"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/white"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:text="Hi Arya"
+        />
+
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:id ="@+id/extracurricularDescription"
+        android:layout_marginTop="40dp"
+
+        android:layout_width="320dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/white"
+        android:fontFamily="@font/hkmediumlegacy"
+        android:textSize="20dp"
+        android:inputType="textMultiLine"
+        android:text="Hi Arya"
+        />
+
+
+    <TextView
+        android:id="@+id/extracurricularDate"
+        android:layout_width="65dp"
+        android:layout_height="35dp"
+        android:layout_alignEnd="@+id/extracurricularDescription"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/extracurricularDescription"
+        android:fontFamily="@font/hksemiboldlegacy"
+        android:text="2016"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

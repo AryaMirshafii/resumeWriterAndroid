@@ -7,12 +7,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:stackHeaderHeight="160dp">
+    app:stackHeaderHeight="140dp"
+
+    >
 
     <LinearLayout
         android:id="@+id/frame_list_card_item"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="140dp"
         android:background="@drawable/shape_rectangle_with_radius">
 
         <TextView
@@ -32,14 +34,19 @@
         android:id="@+id/container_list_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:animateLayoutChanges="true">
+        android:animateLayoutChanges="true"
+        android:layout_marginTop="-60dp"
+        >
 
-        <TextView
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:text="Every corner must (initially) be provided a corner radius greater than 1, or else no corners are rounded. If you want specific corners to not be rounded, a work-around is to use android:radius to set a default corner radius greater than 1, but then override each and every corner with the values you really want, providing zero (0dp) where you don't want rounded corners."
-            />
+            android:scrollbars="vertical" />
+
+
+
     </LinearLayout>
 
 </LinearLayout>

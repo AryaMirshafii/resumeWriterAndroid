@@ -14,16 +14,15 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
 
-        android:layout_above="@+id/phoneLoginEntry"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="80dp"
         android:background="@color/clear"
         android:fontFamily="@font/hksemiboldlegacy"
         android:text="Please Enter Your Phone Number"
-        android:textColor="@color/white"
-        android:textSize="25dp"
         android:textAlignment="center"
-        />
+        android:textColor="@color/white"
+        android:textSize="25dp" />
 
     <EditText
 
@@ -34,14 +33,13 @@
         android:layout_height="35dp"
 
 
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/phoneLoginLabel"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="35dp"
         android:background="@color/white"
         android:fontFamily="@font/hksemiboldlegacy"
         android:inputType="textEmailAddress"
-        android:textSize="25dp"
-        />
+        android:textSize="25dp" />
 
 
 </RelativeLayout>

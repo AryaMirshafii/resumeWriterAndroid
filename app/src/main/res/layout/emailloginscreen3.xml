@@ -17,30 +17,29 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
 
-        android:layout_above="@+id/emailLoginEntry"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="81dp"
         android:background="@color/clear"
         android:fontFamily="@font/hksemiboldlegacy"
         android:text="Please Enter Your Email Address"
-        android:textColor="@color/white"
-        android:textSize="25dp"
         android:textAlignment="center"
-        />
+        android:textColor="@color/white"
+        android:textSize="25dp" />
 
     <EditText
-        android:focusableInTouchMode="true"
         android:id="@+id/emailLoginEntry"
         android:layout_width="250dp"
-
-
         android:layout_height="35dp"
 
 
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/emailLoginLabel"
+
+
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="35dp"
         android:background="@color/white"
+        android:focusableInTouchMode="true"
         android:fontFamily="@font/hksemiboldlegacy"
         android:inputType="textEmailAddress"
         android:textSize="25dp" />

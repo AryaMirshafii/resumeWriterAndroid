@@ -46,7 +46,7 @@ public class editScreen extends Fragment {
     private EditText skillNameEntry;
     private EditText skillDescritpionEntry;
     private NumberPicker skillPicker;
-    private  String[] skillNames;
+    private  String [] skillNames;
     private String[] skillDescriptions;
 
 
@@ -74,7 +74,8 @@ public class editScreen extends Fragment {
     private dataController dataManager;
 
 
-
+    private  String [] courseName;
+    private String[] courseDescriptions;
 
 
     public View onCreateView (final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -153,10 +154,23 @@ public class editScreen extends Fragment {
                             endYearEntry.getText(),organizationNameEntry.getText(),
                             contactEntry.getText(),skillDescritpionEntry.getText());
                     dataManager.getExperience();
+                } else if(resumeSectionIndex == 2){
+                    dataManager.saveCourse(skillNameEntry.getText(),skillDescritpionEntry.getText());
+                } else if(resumeSectionIndex == 3){
+                    dataManager.saveExtracurricular(skillNameEntry.getText(),yearEntry.getText(),skillDescritpionEntry.getText());
                 }
 
 
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                Tab2Fragment fragmentToGoTo = new Tab2Fragment();
+                ft.replace(R.id.editScreen, fragmentToGoTo);
 
+
+
+                ((ViewGroup) backButton.getParent()).removeView(backButton);
+                ((ViewGroup) saveButton.getParent()).removeView(saveButton);
+                ft.commit();
             }
         });
 
@@ -330,34 +344,51 @@ public class editScreen extends Fragment {
 
             skillNameLabel.setVisibility (View.VISIBLE);
             skillNameEntry.setVisibility (View.VISIBLE);
+            skillNameEntry.setText("");
             skillDescritpionEntry.setVisibility(View.VISIBLE);
-            skillPicker.setVisibility(View.GONE);
-
-            experienceYearEntryView.setVisibility(View.VISIBLE);
-            startYearLabel.setVisibility(View.VISIBLE);
-            endYearLabel.setVisibility(View.VISIBLE);
-            startYearEntry.setVisibility(View.VISIBLE);
-            endYearEntry.setVisibility(View.VISIBLE);
-
-            organizationNameLabel.setVisibility(View.VISIBLE);
-            organizationNameEntry.setVisibility(View.VISIBLE);
-
-            contactLabel.setVisibility(View.VISIBLE);
-            contactEntry.setVisibility(View.VISIBLE);
+            skillPicker.setVisibility(View.VISIBLE);
+            configureCoursePicker();
 
 
-
-            yearView.setVisibility(View.VISIBLE);
-            organizationView.setVisibility(View.VISIBLE);
-            contactView.setVisibility(View.VISIBLE);
 
             yearLabel.setVisibility(View.GONE);
             yearEntry.setVisibility(View.GONE);
 
 
+
+
+
+
+
+
+
+
+
+
+
+            experienceYearEntryView.setVisibility(View.GONE);
+            startYearLabel.setVisibility(View.GONE);
+            endYearLabel.setVisibility(View.GONE);
+            startYearEntry.setVisibility(View.GONE);
+            endYearEntry.setVisibility(View.GONE);
+
+            organizationNameLabel.setVisibility(View.GONE);
+            organizationNameEntry.setVisibility(View.GONE);
+
+            contactLabel.setVisibility(View.GONE);
+            contactEntry.setVisibility(View.GONE);
+
+
+
+            yearView.setVisibility(View.GONE);
+            organizationView.setVisibility(View.GONE);
+            contactView.setVisibility(View.GONE);
+
+
         }
 
-
+        skillNameEntry.setText("");
+        skillDescritpionEntry.setText("");
 
 
 
@@ -365,6 +396,7 @@ public class editScreen extends Fragment {
     }
 
     private void configureSkillPicker(){
+
         skillNames = new String[]{"Active Learning","Active Listening","Critical Thinking",
                 "Learning Strategies","Mathematics","Monitoring","Reading Comprehension","Science",
                 "Speaking","Writing","Complex Problem Solving","Time Management","Coordination",
@@ -388,6 +420,7 @@ public class editScreen extends Fragment {
                 "Generating or adapting equipment and technology to serve user needs. ",  "Determining causes of operating errors and deciding what to do about it."
 
         };
+        skillPicker.setDisplayedValues(null);
         skillPicker.setMinValue(0);
         skillPicker.setMaxValue(skillNames.length - 1);
         skillPicker.setDisplayedValues(skillNames);
@@ -399,6 +432,44 @@ public class editScreen extends Fragment {
 
             }
         });
+
+
+
+    }
+
+    private void configureCoursePicker() {
+        courseName = new String[]{"PSYCH 2103","MUSI 1202","LMC 2500","SPAN 3823","MGT 4192","MGT 4193",
+                "APPH 1050","PSYC 1101","LMC 2500","APPH 1040","SPAN 2001","HTS 2015","MGT2200",
+                "HIST 2112","MUSI 1202","PSYC 1101","MGT 4193","MUSI 3251","HIST 2112","LMC 3252",
+                "JAP 1001","PSYC 1101","LMC 2600","SPAN 2001","LMC 2500","MGT 2200"};
+
+
+        courseDescriptions = new String[]{"Behavioral Psychology" + "\n","Chorale" + "\n",
+                "Introduction to Film" + "\n","Latin American Music" + "\n","IMPACT Forum" + "\n",
+                "Servant Leadership" + "\n","Applied Physiology with workout" + "\n","General Psychology" + "\n",
+                "Introduction to Film" + "\n", "Introduction to Film" + "\n","Applied Physiology" + "\n",
+                "Intermediate Spanish" + "\n","History of Sports" + "\n","Information Technology" + "\n",
+                "American History  1877 to present" + "\n","Chorale" + "\n","General Psychology" + "\n",
+                "Servant Leadership" + "\n","Glee Club" + "\n","American History  1877 to present" + "\n",
+                "Film and Television" + "\n", "Beginners Japaneese" + "\n","General Psychology" + "\n",
+                "Intro to Performance Studies" + "\n","Intermediate Spanish" + "\n","Introduction to Film" + "\n",
+                "Information Technology" + "\n"
+        };
+
+
+        skillPicker.setDisplayedValues(null);
+        skillPicker.setMinValue(0);
+        skillPicker.setMaxValue(courseName.length - 1);
+        skillPicker.setDisplayedValues(courseName);
+        skillPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override public void onValueChange(NumberPicker numberPicker, int i, int i2) {
+                skillNameEntry.setText(courseName[skillPicker.getValue()]);
+                skillDescritpionEntry.setText(courseDescriptions[skillPicker.getValue()]);
+
+
+            }
+        });
+
 
 
 
