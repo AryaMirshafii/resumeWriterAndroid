@@ -9,11 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
+
+
 /**
  * Created by aryamirshafii on 1/14/18.
  */
 
-public class dataController {
+public class dataController{
     private Context context;
     private String objectiveFileName = "objective.txt";
     private String loginFileName = "login.txt";
@@ -25,15 +30,112 @@ public class dataController {
     private String experienceFileName = "experience.txt";
     private String courseFileName = "courses.txt";
     private String extracurricularFilename = "extracurriculars";
+    private String resumeNumberFileName = "extracurriculars";
+
 
 
 
     private String emailFileName = "email.txt";
+
+    private String filePathFileName = "filepath.txt";
+
+
+
+
+
+
     public  dataController(Context context){
         this.context = context;
 
 
+
     }
+
+
+
+    public void setResumeNumber(int resumeNumber){
+        String theResumeNumber = Integer.toString(resumeNumber);
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(resumeNumberFileName , Context.MODE_PRIVATE);
+            outputStream.write(theResumeNumber.toString().getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getResumeNumber(){
+        FileInputStream fis;
+        int n;
+        try {
+            fis = context.openFileInput(resumeNumberFileName);
+            StringBuffer fileContent = new StringBuffer("");
+
+            byte[] buffer = new byte[1024];
+
+
+
+            while ((n = fis.read(buffer)) != -1)
+            {
+                fileContent.append(new String(buffer, 0, n));
+            }
+
+            return fileContent.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "1";
+
+    }
+
+
+
+
+    public void setFilePath(String filePath){
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(filePathFileName , Context.MODE_PRIVATE);
+            outputStream.write(filePath.toString().getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getFilePath(){
+        FileInputStream fis;
+        int n;
+        try {
+            fis = context.openFileInput(filePathFileName);
+            StringBuffer fileContent = new StringBuffer("");
+
+            byte[] buffer = new byte[1024];
+
+
+
+            while ((n = fis.read(buffer)) != -1)
+            {
+                fileContent.append(new String(buffer, 0, n));
+            }
+
+            return fileContent.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+
+    }
+
+
 
 
 
@@ -294,6 +396,7 @@ public class dataController {
             outputStream = context.openFileOutput(objectiveFileName , Context.MODE_PRIVATE);
             outputStream.write(objective.getBytes());
             outputStream.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -317,13 +420,13 @@ public class dataController {
                 fileContent.append(new String(buffer, 0, n));
             }
 
-            return fileContent.toString();
+            return  fileContent.toString();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "";
+        return  "";
     }
 
     /**
@@ -331,24 +434,32 @@ public class dataController {
      * @param name the skill name
      * @param description the skill description
      */
+    private Editable theName;
+    private Editable theDescription;
     public void saveSkill(Editable name, Editable description) {
+        theName = name;
+        theDescription = description;
         String skillToAdd = name +"_" + description + "\n";
         FileOutputStream outputStream;
+        if(theName != null && theDescription != null) {
+            try {
+                outputStream = context.openFileOutput(skillFileName , Context.MODE_APPEND);
+                outputStream.write(skillToAdd.getBytes());
+                outputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-
-        try {
-            outputStream = context.openFileOutput(skillFileName , Context.MODE_APPEND);
-            outputStream.write(skillToAdd.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+
+
     }
 
 
-    //start with array but use hashmap once you know it works
-    public List getSkills(){
+
+    public  List getSkills(){
        ArrayList<skill> listToReturn = new ArrayList<skill>();
+
         try {
             InputStream inputStream = context.openFileInput(skillFileName);
 
@@ -358,8 +469,8 @@ public class dataController {
 
                 String l;
                 skill toAdd;
-                while (( l = bufferedReader.readLine()) != null) {
-                    // do what you want with the line
+                while ( (l = bufferedReader.readLine()) != null) {
+
                     System.out.println("MY line  is" + l);
                     String[] skillSeparated = l.split("_");
                     toAdd= new skill(skillSeparated[0], skillSeparated[1]);
@@ -374,6 +485,7 @@ public class dataController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return listToReturn;
     }
 
@@ -517,7 +629,7 @@ public class dataController {
 
                 String l;
                 extracurricular toAdd;
-                while (( l = bufferedReader.readLine()) != null) {
+                while ( bufferedReader.readLine().length() > 3 && (l = bufferedReader.readLine()) != null) {
                     // do what you want with the line
                     System.out.println("MY line  is" + l);
                     String[] skillSeparated = l.split("_");

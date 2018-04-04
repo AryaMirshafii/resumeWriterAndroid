@@ -52,6 +52,7 @@ public class Tab2Fragment extends Fragment {
         return view;
     }
 
+
     private void configureSubViews(){
         objectiveEntry= (EditText) view.findViewById(R.id.objectiveEntry);
 

@@ -305,7 +305,9 @@
 
         android:singleLine="true"
         android:text="Georgia Tech Excel Program"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:layoutDirection="rtl"
+        />
 
 
 </RelativeLayout>

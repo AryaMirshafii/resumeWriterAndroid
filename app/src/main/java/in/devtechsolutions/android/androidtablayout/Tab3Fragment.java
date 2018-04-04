@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import pub.devrel.easypermissions.EasyPermissions;
 
-/**
- * Created by suraj on 23/6/17.
- */
+
+
 
 public class Tab3Fragment extends Fragment {
 
@@ -23,6 +23,11 @@ public class Tab3Fragment extends Fragment {
     private EditText schoolEntry;
     private dataController dataManager;
     private TextView welcomeLabel;
+
+
+
+    //google Drive stuff
+    private Button mCallApiButton;
 
     @Nullable
     @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

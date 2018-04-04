@@ -30,7 +30,7 @@ public class loginScreen5 extends Fragment {
         view =inflater.inflate(R.layout.educationloginscreen5 , container, false);
         educationLoginEntry = (EditText) view.findViewById(R.id.schoolLoginEntry);
         educationLoginLabel = (TextView) view.findViewById(R.id.schoolLoginLabel);
-        educationLoginEntry.setText("Georgia Tech Excel Program");
+        educationLoginEntry.setText("Georgia Tech");
         configureViews();
 
         dataManager = new dataController(getContext());

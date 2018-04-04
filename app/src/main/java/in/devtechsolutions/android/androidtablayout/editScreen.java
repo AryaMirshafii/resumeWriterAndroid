@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ import java.util.zip.Inflater;
  * Created by aryamirshafii on 1/7/18.
  */
 
-public class editScreen extends Fragment {
+public class editScreen extends Fragment{
     private String resumeSections[] = {"Skills","Experience", "Courses","Extracurriculars"};
     private int resumeSectionIndex = 0;
     @Nullable private View view;
@@ -77,10 +78,14 @@ public class editScreen extends Fragment {
     private  String [] courseName;
     private String[] courseDescriptions;
 
+    private View pdfVidew;
+
 
     public View onCreateView (final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataManager = new dataController(getContext());
         view =inflater.inflate(R.layout.edit_view1, container, false);
+
+
 
         sectionText = (TextView) view.findViewById(R.id.resumeSectionName);
         sectionText.setText(resumeSections[resumeSectionIndex]);
@@ -474,5 +479,6 @@ public class editScreen extends Fragment {
 
 
     }
+
 
 }
