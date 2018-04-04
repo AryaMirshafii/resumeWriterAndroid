@@ -437,20 +437,24 @@ public class dataController{
     private Editable theName;
     private Editable theDescription;
     public void saveSkill(Editable name, Editable description) {
+
+        if(name == null || description == null){
+            return;
+        }
         theName = name;
         theDescription = description;
         String skillToAdd = name +"_" + description + "\n";
         FileOutputStream outputStream;
-        if(theName != null && theDescription != null) {
-            try {
-                outputStream = context.openFileOutput(skillFileName , Context.MODE_APPEND);
-                outputStream.write(skillToAdd.getBytes());
-                outputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
+        try {
+            outputStream = context.openFileOutput(skillFileName , Context.MODE_APPEND);
+            outputStream.write(skillToAdd.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
 
 
     }
@@ -492,6 +496,9 @@ public class dataController{
 
 
     public void saveCourse(Editable name, Editable description){
+        if(name == null || description == null ){
+            return;
+        }
         String experienceToAdd = name +"_" + description  + "\n";
         FileOutputStream outputStream;
 
@@ -549,6 +556,10 @@ public class dataController{
 
 
     public void saveExperience(Editable title, Editable startYear, Editable endYear,Editable organizationName, Editable contact, Editable description){
+        if(title == null || startYear == null || endYear == null || organizationName == null || contact == null || description == null){
+            return;
+        }
+
         String experienceToAdd = title +"_" + startYear +"_" + endYear +"_" + organizationName +"_" + contact +"_" + description + "\n";
         FileOutputStream outputStream;
 
@@ -603,6 +614,10 @@ public class dataController{
 
 
     public void saveExtracurricular(Editable name,Editable year, Editable description) {
+        if(name == null || year == null || description == null){
+            return;
+        }
+
         String skillToAdd = name +"_" + year + "_" +  description + "\n";
         FileOutputStream outputStream;
 

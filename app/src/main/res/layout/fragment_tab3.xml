@@ -71,7 +71,9 @@
         android:maxLines="1"
         android:singleLine="true"
         android:text="Arya"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:inputType="textPersonName"
+        />
 
 
     <View
@@ -119,7 +121,9 @@
 
         android:singleLine="true"
         android:text="Mirshafii"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:inputType="textPersonName"
+        />
 
 
 
@@ -180,7 +184,8 @@
 
         android:singleLine="true"
         android:text="amirshafii3@gatech.edu"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:inputType="textPersonName"/>
 
 
 
@@ -239,7 +244,8 @@
 
         android:singleLine="true"
         android:text="7148249005"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:inputType="textPersonName"/>
 
 
 
@@ -307,6 +313,7 @@
         android:text="Georgia Tech Excel Program"
         android:textSize="17dp"
         android:layoutDirection="rtl"
+        android:inputType="textPersonName"
         />
 
 
