@@ -13,13 +13,19 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
+import com.google.api.client.*;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.util.ExponentialBackOff;
+import com.google.api.services.drive.DriveScopes;
+
+import java.util.Arrays;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
 
+import com.google.api.services.drive.DriveScopes;
 
-
-public class Tab3Fragment extends Fragment {
+public class Tab3Fragment extends Fragment{
 
 
     private EditText firstNameEntry;
@@ -35,6 +41,9 @@ public class Tab3Fragment extends Fragment {
     //google Drive stuff
     private Button mCallApiButton;
     private Boolean editTextsConfigured = false;
+    private Button googleSignInButton;
+
+
 
     @Nullable
     @Override public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,10 +56,54 @@ public class Tab3Fragment extends Fragment {
         welcomeLabel = (TextView) view.findViewById(R.id.welcomceLabel);
         dataManager = new dataController(getContext());
         configureText();
+
+
+
+
+        googleSignInButton = (Button)view.findViewById(R.id.signInButton);
+
+        if(dataManager.getLoginComplete()){
+            ((MainActivity)getActivity()).initializeCredentials();
+        }
+
+        if(((MainActivity)getActivity()).getSignInState()){
+            googleSignInButton.setVisibility(view.GONE);
+        } else {
+            googleSignInButton.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+
+                    ((MainActivity)getActivity()).getResultsFromApi();
+
+                    if(((MainActivity)getActivity()).getSignInState()){
+                        googleSignInButton.setVisibility(view.GONE);
+                    }
+
+                }
+            });
+        }
+
+
+
+
+
+
         return view;
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
     private void configureText(){
         welcomeLabel.setText("Welcome " + dataManager.getFirstname());
         firstNameEntry.setText(dataManager.getFirstname());

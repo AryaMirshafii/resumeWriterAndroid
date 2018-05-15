@@ -3,8 +3,12 @@ package in.devtechsolutions.android.androidtablayout;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.print.PdfPrint;
+import android.print.PrintAttributes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
@@ -20,6 +24,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by suraj on 23/6/17.
@@ -56,6 +63,11 @@ public class Tab1Fragment extends Fragment {
 
         return view;
     }
+
+
+
+
+
     @Override
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
@@ -87,7 +99,6 @@ public class Tab1Fragment extends Fragment {
 
 
 
-
         resume1.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -96,6 +107,10 @@ public class Tab1Fragment extends Fragment {
                 resumeWebview.loadData(pdfManager.getResume1(), "text/html; charset=utf-8", "UTF-8");
 
                 //resumeWebview.loadUrl("file:///android_asset/resume1.html");
+
+
+
+                createWebPrintJob(resumeWebview);
 
 
             }
@@ -108,6 +123,10 @@ public class Tab1Fragment extends Fragment {
                 resumeWebview.loadData(pdfManager.getResume2(), "text/html; charset=utf-8", "UTF-8");
                 //resumeWebview.loadUrl("file:///android_asset/resume2.html");
 
+
+
+                createWebPrintJob(resumeWebview);
+
             }
         });
         resume3.setOnClickListener(new View.OnClickListener(){
@@ -117,6 +136,9 @@ public class Tab1Fragment extends Fragment {
                 dataManager.setResumeNumber(3);
                 resumeWebview.loadData(pdfManager.getResume3(), "text/html; charset=utf-8", "UTF-8");
                 //resumeWebview.loadUrl("file:///android_asset/resume3.html");
+
+
+                createWebPrintJob(resumeWebview);
 
             }
         });
@@ -128,6 +150,7 @@ public class Tab1Fragment extends Fragment {
                 dataManager.setResumeNumber(4);
                 resumeWebview.loadData(pdfManager.getResume4(), "text/html; charset=utf-8", "UTF-8");
                 //resumeWebview.loadUrl("file:///android_asset/resume4.html");
+                createWebPrintJob(resumeWebview);
 
             }
         });
@@ -163,6 +186,30 @@ public class Tab1Fragment extends Fragment {
 
 
     }
+
+
+
+
+    private void createWebPrintJob(WebView webView) {
+        String jobName = getString(R.string.app_name) + " Document";
+        PrintAttributes attributes = new PrintAttributes.Builder()
+                .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+                .setResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600))
+                .setMinMargins(PrintAttributes.Margins.NO_MARGINS).build();
+        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
+        if(path.exists()){
+            try {
+                path.getCanonicalFile().delete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        PdfPrint pdfPrint = new PdfPrint(attributes);
+        pdfPrint.print(webView.createPrintDocumentAdapter(jobName), path, "output_" + System.currentTimeMillis() + ".pdf");
+        System.out.println("my file path is  " + path.getPath());
+        dataManager.setFilePath(path.getPath());
+    }
+
 
     private void setUpScrollView(){
 
