@@ -40,7 +40,7 @@ public class dataController{
 
     private String filePathFileName = "filepath.txt";
 
-
+    private String driveIDFileName = "googleFolderID.txt";
 
 
 
@@ -48,9 +48,94 @@ public class dataController{
     public  dataController(Context context){
         this.context = context;
 
+    }
+
+
+
+
+
+
+
+
+
+    public void setGoogleDriveFolderID(String folderID){
+
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(driveIDFileName , Context.MODE_PRIVATE);
+            outputStream.write(folderID.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+
+
+
+    public boolean driveFolderIDExists(){
+
+
+        FileInputStream fis;
+
+        try {
+
+            fis = context.openFileInput(driveIDFileName);
+
+            System.out.println("File was opened");
+            return true;
+
+
+        } catch (IOException e) {
+            System.out.println("Cant open folderID");
+            e.printStackTrace();
+            return false;
+        }
+
 
 
     }
+
+
+
+
+
+    public String getFolderID(){
+        FileInputStream fis;
+        int n;
+        try {
+            fis = context.openFileInput(driveIDFileName);
+            StringBuffer fileContent = new StringBuffer("");
+
+            byte[] buffer = new byte[1024];
+
+
+
+            while ((n = fis.read(buffer)) != -1)
+            {
+                fileContent.append(new String(buffer, 0, n));
+            }
+
+            return fileContent.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "1";
+
+    }
+
+
+
+
+
+
 
 
 

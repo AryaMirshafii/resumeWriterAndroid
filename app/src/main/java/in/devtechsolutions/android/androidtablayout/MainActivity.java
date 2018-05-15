@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.drive.DriveScopes;
+import com.google.api.services.drive.*;
 
 import java.util.Arrays;
 import java.util.zip.Inflater;
@@ -97,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
      */
     private ViewPager mViewPager;
    // private TabLayout mTabLayout;
+    private dataController dataManager;
 
 
 
@@ -113,14 +115,15 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     private static final String BUTTON_TEXT = "Call Drive API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY };
+    private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY, DriveScopes.DRIVE_FILE, DriveScopes.DRIVE_METADATA};
 
     private boolean isSignedIn = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        dataManager = new dataController(getApplicationContext());
         setContentView(R.layout.activity_main);
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -470,7 +473,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         }
 
         /**
-         * Fetch a list of up to 10 file names and IDs.
+         * Fetch a list of all files on the user's drive
          * @return List of Strings describing files, or an empty list if no files
          *         found.
          * @throws IOException
@@ -479,17 +482,52 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             // Get a list of up to 10 files.
             List<String> fileInfo = new ArrayList<String>();
             FileList result = mService.files().list()
-                    .setPageSize(10)
+
                     .setFields("nextPageToken, files(id, name)")
+
                     .execute();
             List<File> files = result.getFiles();
+            String folderName = String.format("%s_%s_resumes", dataManager.getFirstname(), dataManager.getLastName());
+            if(!dataManager.driveFolderIDExists()){
+
+                createFolderOnDrive(folderName);
+
+
+
+            }
             if (files != null) {
                 for (File file : files) {
                     fileInfo.add(String.format("%s (%s)\n",
                             file.getName(), file.getId()));
+
+
                 }
             }
             return fileInfo;
+        }
+
+
+        /**
+         * creates a folder on google drive
+         * @param folderName the ideal anme of the folder
+         */
+        private void createFolderOnDrive(String folderName){
+            System.out.println("Creating a new folder on google drive");
+            File fileMetadata = new File();
+            fileMetadata.setName(folderName);
+            fileMetadata.setMimeType("application/vnd.google-apps.folder");
+
+            File file = null;
+            try {
+                file = mService.files().create(fileMetadata)
+                        .setFields("id")
+                        .execute();
+            } catch (IOException e) {
+                System.out.println("An error creating folder");
+                e.printStackTrace();
+            }
+            dataManager.setGoogleDriveFolderID(file.getId());
+            System.out.println("Folder ID: " + file.getId());
         }
 
 
