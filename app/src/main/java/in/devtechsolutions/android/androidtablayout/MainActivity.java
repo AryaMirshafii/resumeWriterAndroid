@@ -216,7 +216,20 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             acquireGooglePlayServices();
         } else if (mCredential.getSelectedAccountName() == null) {
             isSignedIn = false;
-            //chooseAccount();
+            if (EasyPermissions.hasPermissions(
+                    this, Manifest.permission.GET_ACCOUNTS)) {
+                String accountName = getPreferences(Context.MODE_PRIVATE)
+                        .getString(PREF_ACCOUNT_NAME, null);
+                if (accountName != null) {
+                    mCredential.setSelectedAccountName(accountName);
+                    getResultsFromApi();
+                } else {
+                    // Start a dialog from which the user can choose an account
+                    startActivityForResult(
+                            mCredential.newChooseAccountIntent(),
+                            REQUEST_ACCOUNT_PICKER);
+                }
+            }
         } else if (! isDeviceOnline()) {
             isSignedIn = false;
             System.out.println("No network connection available.");
@@ -232,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
 
         if (mCredential.getSelectedAccountName() == null) {
-
+            System.out.println("The user has not chosen an account");
             return false;
 
         } else if (! isDeviceOnline()) {
