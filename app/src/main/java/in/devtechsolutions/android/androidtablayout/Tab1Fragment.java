@@ -59,6 +59,7 @@ public class Tab1Fragment extends Fragment {
         resumeWebview.getSettings().setJavaScriptEnabled(true);
         //resumeWebview.loadUrl("file:///android_asset/resume1.html");
         resumeWebview.loadData(pdfManager.getResume1(), "text/html; charset=utf-8", "UTF-8");
+
         ((MainActivity)getActivity()).initializeCredentials();
 
 
@@ -117,8 +118,15 @@ public class Tab1Fragment extends Fragment {
 
 
                 createWebPrintJob(resumeWebview);
-
-                ((MainActivity)getActivity()).uploadResumeToDrive();
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                ((MainActivity)getActivity()).uploadResumeToDrive();
+                            }
+                        },
+                        2000
+                );
 
 
             }
@@ -132,8 +140,16 @@ public class Tab1Fragment extends Fragment {
                 //resumeWebview.loadUrl("file:///android_asset/resume2.html");
 
 
-
                 createWebPrintJob(resumeWebview);
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                ((MainActivity)getActivity()).uploadResumeToDrive();
+                            }
+                        },
+                        2000
+                );
 
             }
         });
@@ -147,7 +163,18 @@ public class Tab1Fragment extends Fragment {
 
 
                 createWebPrintJob(resumeWebview);
-                ((MainActivity)getActivity()).uploadResumeToDrive();
+
+
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                ((MainActivity)getActivity()).uploadResumeToDrive();
+                            }
+                        },
+                        2000
+                );
+
 
 
             }
@@ -160,8 +187,18 @@ public class Tab1Fragment extends Fragment {
                 dataManager.setResumeNumber(4);
                 resumeWebview.loadData(pdfManager.getResume4(), "text/html; charset=utf-8", "UTF-8");
                 //resumeWebview.loadUrl("file:///android_asset/resume4.html");
+
+
                 createWebPrintJob(resumeWebview);
-                ((MainActivity)getActivity()).uploadResumeToDrive();
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                ((MainActivity)getActivity()).uploadResumeToDrive();
+                            }
+                        },
+                        2000
+                );
 
             }
         });
@@ -179,9 +216,11 @@ public class Tab1Fragment extends Fragment {
         //resumeWebview.getSettings().setJavaScriptEnabled(true);
 
         WebSettings settings = resumeWebview.getSettings();
-        settings.setBuiltInZoomControls(false);
+
         settings.setUseWideViewPort(true);
-        settings.setJavaScriptEnabled(true);
+        //settings.setJavaScriptEnabled(true);
+
+        /**
         settings.setSupportMultipleWindows(true);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setLoadsImagesAutomatically(true);
@@ -192,7 +231,7 @@ public class Tab1Fragment extends Fragment {
 
 
 
-
+*/
 
 
 
@@ -205,15 +244,41 @@ public class Tab1Fragment extends Fragment {
         String jobName = getString(R.string.app_name) + " Document";
         PrintAttributes attributes = new PrintAttributes.Builder()
                 .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
-                .setResolution(new PrintAttributes.Resolution("pdf", "pdf", 1200, 1200))
+                .setResolution(new PrintAttributes.Resolution("pdf", "pdf", 1500, 1500))
                 .setMinMargins(PrintAttributes.Margins.NO_MARGINS).build();
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
+        for(File aFile : path.listFiles()){
+            recursiveRemove(aFile);
+        }
         PdfPrint pdfPrint = new PdfPrint(attributes);
         pdfPrint.print(webView.createPrintDocumentAdapter(jobName), path, "outputttttttt_" + System.currentTimeMillis() + ".pdf");
-        dataManager.setFilePath(path.listFiles()[1].getPath());
-        System.out.println("The file paaaaathh is " + path.listFiles()[1].getPath());
+        dataManager.setFilePath(path.listFiles()[0].getPath());
+        System.out.println("The file paaaaathh is " + path.listFiles()[0].getPath());
     }
+    private boolean recursiveRemove(File file) {
+        System.out.println("Removing file name ++++++++  " + file.getName());
+        if(file == null  || !file.exists()) {
+            return false;
+        }
 
+        if(file.isDirectory()) {
+            File[] list = file.listFiles();
+
+            if(list != null) {
+
+                for(File item : list) {
+                    recursiveRemove(item);
+                }
+
+            }
+        }
+
+        if(file.exists()) {
+            file.delete();
+        }
+
+        return !file.exists();
+    }
 
     private void setUpScrollView(){
 

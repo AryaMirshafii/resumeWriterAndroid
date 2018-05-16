@@ -46,6 +46,7 @@ public class PdfPrint {
         try {
             System.out.println("Saved PDF");
             file.createNewFile();
+
             return ParcelFileDescriptor.open(file, ParcelFileDescriptor.MODE_READ_WRITE);
         } catch (Exception e) {
             Log.e(TAG, "Failed to open ParcelFileDescriptor", e);
