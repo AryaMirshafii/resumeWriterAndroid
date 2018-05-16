@@ -24,11 +24,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.http.FileContent;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.*;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.zip.Inflater;
 
 import pub.devrel.easypermissions.EasyPermissions;
@@ -118,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     private static final String[] SCOPES = { DriveScopes.DRIVE_METADATA_READONLY, DriveScopes.DRIVE_FILE, DriveScopes.DRIVE_METADATA};
 
     private boolean isSignedIn = false;
-
+    private MakeRequestTask driveRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +188,14 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     }
 
 
+    public void uploadResumeToDrive(){
+
+
+
+        new MakeRequestTask(mCredential).execute();
+    }
+
+
 
 
 
@@ -209,7 +219,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         } else {
             isSignedIn = true;
             System.out.println("The User is successfully signed in ");
-            new MakeRequestTask(mCredential).execute();
+            driveRequest  = new MakeRequestTask(mCredential);
+            driveRequest.execute();
         }
     }
 
@@ -444,7 +455,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
      * An asynchronous task that handles the Drive API call.
      * Placing the API calls in their own task ensures the UI stays responsive.
      */
-    private class MakeRequestTask extends AsyncTask<Void, Void, List<String>> {
+    class MakeRequestTask extends AsyncTask<Void, Void, List<String>> {
         private com.google.api.services.drive.Drive mService = null;
         private Exception mLastError = null;
 
@@ -457,6 +468,10 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                     .build();
         }
 
+        public com.google.api.services.drive.Drive getdriveService(){
+            return mService;
+        }
+
         /**
          * Background task to call Drive API.
          * @param params no parameters needed for this task.
@@ -464,12 +479,38 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         @Override
         protected List<String> doInBackground(Void... params) {
             try {
+                uploadResumeToDrive();
                 return getDataFromApi();
             } catch (Exception e) {
                 mLastError = e;
                 cancel(true);
                 return null;
             }
+        }
+
+
+
+
+        private void uploadResumeToDrive(){
+            Drive driver = driveRequest.getdriveService();
+
+
+            String folderId = dataManager.getFolderID();
+            File fileMetadata = new File();
+            fileMetadata.setName("resume.pdf");
+
+            fileMetadata.setParents(Collections.singletonList(folderId));
+            java.io.File filePath = new java.io.File(dataManager.getFilePath());
+            FileContent mediaContent = new FileContent("application/pdf", filePath);
+            File file = null;
+            try {
+                file = driver.files().create(fileMetadata, mediaContent)
+                        .setFields("id, parents")
+                        .execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println("File ID: " + file.getId());
         }
 
         /**

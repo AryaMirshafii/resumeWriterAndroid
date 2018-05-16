@@ -2,6 +2,9 @@ package in.devtechsolutions.android.androidtablayout;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.os.Environment;
 import android.print.PdfPrint;
@@ -18,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
@@ -26,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -54,6 +59,7 @@ public class Tab1Fragment extends Fragment {
         resumeWebview.getSettings().setJavaScriptEnabled(true);
         //resumeWebview.loadUrl("file:///android_asset/resume1.html");
         resumeWebview.loadData(pdfManager.getResume1(), "text/html; charset=utf-8", "UTF-8");
+        ((MainActivity)getActivity()).initializeCredentials();
 
 
 
@@ -112,6 +118,8 @@ public class Tab1Fragment extends Fragment {
 
                 createWebPrintJob(resumeWebview);
 
+                ((MainActivity)getActivity()).uploadResumeToDrive();
+
 
             }
         });
@@ -139,6 +147,8 @@ public class Tab1Fragment extends Fragment {
 
 
                 createWebPrintJob(resumeWebview);
+                ((MainActivity)getActivity()).uploadResumeToDrive();
+
 
             }
         });
@@ -151,6 +161,7 @@ public class Tab1Fragment extends Fragment {
                 resumeWebview.loadData(pdfManager.getResume4(), "text/html; charset=utf-8", "UTF-8");
                 //resumeWebview.loadUrl("file:///android_asset/resume4.html");
                 createWebPrintJob(resumeWebview);
+                ((MainActivity)getActivity()).uploadResumeToDrive();
 
             }
         });
@@ -194,20 +205,13 @@ public class Tab1Fragment extends Fragment {
         String jobName = getString(R.string.app_name) + " Document";
         PrintAttributes attributes = new PrintAttributes.Builder()
                 .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
-                .setResolution(new PrintAttributes.Resolution("pdf", "pdf", 600, 600))
+                .setResolution(new PrintAttributes.Resolution("pdf", "pdf", 1200, 1200))
                 .setMinMargins(PrintAttributes.Margins.NO_MARGINS).build();
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM + "/PDFTest/");
-        if(path.exists()){
-            try {
-                path.getCanonicalFile().delete();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         PdfPrint pdfPrint = new PdfPrint(attributes);
-        pdfPrint.print(webView.createPrintDocumentAdapter(jobName), path, "output_" + System.currentTimeMillis() + ".pdf");
-        System.out.println("my file path is  " + path.getPath());
-        dataManager.setFilePath(path.getPath());
+        pdfPrint.print(webView.createPrintDocumentAdapter(jobName), path, "outputttttttt_" + System.currentTimeMillis() + ".pdf");
+        dataManager.setFilePath(path.listFiles()[1].getPath());
+        System.out.println("The file paaaaathh is " + path.listFiles()[1].getPath());
     }
 
 

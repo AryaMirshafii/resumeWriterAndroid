@@ -29,8 +29,8 @@ public class dataController{
     private String skillFileName = "skill.txt";
     private String experienceFileName = "experience.txt";
     private String courseFileName = "courses.txt";
-    private String extracurricularFilename = "extracurriculars";
-    private String resumeNumberFileName = "extracurriculars";
+    private String extracurricularFilename = "extracurriculars.txth";
+    private String resumeNumberFileName = "resumeNumber.txt";
 
 
 
