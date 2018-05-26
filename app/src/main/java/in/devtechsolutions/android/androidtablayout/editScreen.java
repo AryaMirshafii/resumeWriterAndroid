@@ -2,19 +2,24 @@ package in.devtechsolutions.android.androidtablayout;
 
 import android.content.Context;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.EditText;
 
@@ -79,7 +84,7 @@ public class editScreen extends Fragment{
     private String[] courseDescriptions;
 
     private View pdfVidew;
-
+    private PopupWindow mPopupWindow;
 
     public View onCreateView (final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         dataManager = new dataController(getContext());
@@ -152,16 +157,42 @@ public class editScreen extends Fragment{
             public void onClick(View v) {
                 if(resumeSectionIndex == 0){
 
+
+                    if(skillNameEntry.getText().toString().equals("") || skillDescritpionEntry.getText().toString().equals("")){
+                        determinePopup();
+                        return;
+                    }
+
+
+
                     dataManager.saveSkill(skillNameEntry.getText(),skillDescritpionEntry.getText());
                     dataManager.getSkills();
                 } else if(resumeSectionIndex == 1){
+
+                    if(skillNameEntry.getText().toString().matches("") || startYearEntry.getText().toString().matches("") || endYearEntry.getText().toString().matches("")|| organizationNameEntry.getText().toString().matches("")
+                            || skillDescritpionEntry.getText().toString().matches("")) {
+                        determinePopup();
+                        return;
+
+                    }
                     dataManager.saveExperience(skillNameEntry.getText(),startYearEntry.getText(),
                             endYearEntry.getText(),organizationNameEntry.getText(),
                             contactEntry.getText(),skillDescritpionEntry.getText());
                     dataManager.getExperience();
                 } else if(resumeSectionIndex == 2){
+
+                    if(skillNameEntry.getText().toString().matches("") || skillDescritpionEntry.getText().toString().matches("")) {
+                        determinePopup();
+                        return;
+                    }
                     dataManager.saveCourse(skillNameEntry.getText(),skillDescritpionEntry.getText());
                 } else if(resumeSectionIndex == 3){
+
+                    if(skillNameEntry.getText().toString().matches("" )|| yearEntry.getText().toString().matches("")
+                            || skillDescritpionEntry.getText().toString().matches("")){
+                        determinePopup();
+                        return;
+                    }
                     dataManager.saveExtracurricular(skillNameEntry.getText(),yearEntry.getText(),skillDescritpionEntry.getText());
                 }
 
@@ -478,6 +509,138 @@ public class editScreen extends Fragment{
 
 
 
+    }
+
+
+
+
+    private void determinePopup(){
+
+
+
+        Context theContext = getContext();
+        LayoutInflater inflater = (LayoutInflater) theContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        // Inflate the custom layout/view
+        View customView = inflater.inflate(R.layout.savingnotification,null);
+
+
+
+        // Initialize a new instance of popup window
+        mPopupWindow = new PopupWindow(
+                customView,
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+
+        // Set an elevation value for popup window
+        // Call requires API level 21
+        if(Build.VERSION.SDK_INT>=21){
+            mPopupWindow.setElevation(5.0f);
+        }
+        TextView warningText = (TextView) customView.findViewById(R.id.warningText);
+        if(resumeSectionIndex == 0){
+
+
+
+            if(skillNameEntry.getText().toString(). matches("") && !skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText( "Please enter a name for this skill!");
+            } else if(!skillNameEntry.getText().toString().matches("") && skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a description for this skill!");
+            }else if(skillNameEntry.getText().toString().matches("") && skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a name and description for this skill!");
+            }
+
+
+        }else if(resumeSectionIndex == 1){
+
+
+
+
+
+
+            if(skillNameEntry.getText().toString().matches("") && !startYearEntry.getText().toString().matches("")
+                    && !endYearEntry.getText().toString().matches("") && !organizationNameEntry.getText().toString().matches("")
+                    && !skillDescritpionEntry.getText().toString().matches("")){
+
+                warningText.setText("Please enter a name for this experience entry!");
+
+            }else if(!skillNameEntry.getText().toString().matches("") && startYearEntry.getText().toString().matches("")
+                    && !endYearEntry.getText().toString().matches("") && !organizationNameEntry.getText().toString().matches("")
+                    && !skillDescritpionEntry.getText().toString().matches("")){
+
+                warningText.setText("Please enter a start year for this experience entry!");
+
+            } else if(!skillNameEntry.getText().toString().matches("") && !startYearEntry.getText().toString().matches("")
+                    && endYearEntry.getText().toString().matches("") && !organizationNameEntry.getText().toString().matches("")
+                    && !skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText("Please enter an end year for this experience entry!");
+
+            } else if(!skillNameEntry.getText().toString().matches("") && !startYearEntry.getText().toString().matches("")
+                    && !endYearEntry.getText().toString().matches("") && organizationNameEntry.getText().toString().matches("")
+                    && !skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a company name for this experience entry!");
+
+            } else if(!skillNameEntry.getText().toString().matches("")  && !startYearEntry.getText().toString().matches("")
+                    && !endYearEntry.getText().toString().matches("") && !organizationNameEntry.getText().toString().matches("")
+                    && skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a description for this experience entry!");
+
+            } else {
+                warningText.setText("It appears that this entry has more than one empty field. Be sure to populate all fields!");
+            }
+
+
+        } else if(resumeSectionIndex == 2){
+
+            if(skillNameEntry.getText().toString().matches("") && !skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a name for this course!");
+            } else if(!skillNameEntry.getText().toString().matches("") && skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a description for this course!");
+            }else if(skillNameEntry.getText().toString().matches("") && skillDescritpionEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a name and description for this course!");
+            }
+
+        } else if(resumeSectionIndex == 3){
+
+            if(skillNameEntry.getText().toString().matches("" )|| yearEntry.getText().toString().matches("")
+                    || skillDescritpionEntry.getText().toString().matches("")){
+
+            }
+
+
+
+
+
+            if(skillNameEntry.getText().toString().matches("" ) && !skillDescritpionEntry.getText().toString().matches("")
+                    && !yearEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a name for this extracurricular!");
+            } else if(!skillNameEntry.getText().toString().matches("" ) && skillDescritpionEntry.getText().toString().matches("")
+                    && !yearEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a description for this extracurricular!");
+            }else if(!skillNameEntry.getText().toString().matches("" ) && !skillDescritpionEntry.getText().toString().matches("")
+                    && yearEntry.getText().toString().matches("")){
+                warningText.setText("Please enter a year for this extracurricular!");
+            }else {
+                warningText.setText("It appears that this entry has more than one empty field. Be sure to populate all fields!");
+            }
+
+        }
+
+
+        Button closingButton = (Button) customView.findViewById(R.id.closePopup);
+
+        // Set a click listener for the popup window close button
+        closingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Dismiss the popup window
+                mPopupWindow.dismiss();
+            }
+        });
+
+
+        mPopupWindow.showAtLocation(view, Gravity.CENTER,0,0);
     }
 
 
